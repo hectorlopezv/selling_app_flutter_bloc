@@ -14,6 +14,8 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  final PageController _pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +30,7 @@ class _WelcomeState extends State<Welcome> {
                 alignment: Alignment.topCenter,
                 children: [
                   PageView(
+                      controller: _pageController,
                       onPageChanged: (index) {
                         state.page = index;
                         BlocProvider.of<WelcomeBloc>(context)
@@ -112,31 +115,47 @@ class _WelcomeState extends State<Welcome> {
                 fontWeight: FontWeight.normal),
           ),
         ),
-        Container(
-          width: 375.w,
-          height: 50.h,
-          margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.w),
+        GestureDetector(
+          onTap: () {
+            if (index == 3) {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/sign_in", (route) => false);
+            } else {
+              //animation
+              _pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.decelerate,
+              );
+              BlocProvider.of<WelcomeBloc>(context).add(WelcomeEvent());
+            }
+          },
+          child: Container(
+            width: 375.w,
+            height: 50.h,
+            margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.all(
+                Radius.circular(15.w),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                )
+              ],
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              )
-            ],
-          ),
-          child: Center(
-            child: Text(
-              buttonName,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.normal,
+            child: Center(
+              child: Text(
+                buttonName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
           ),
