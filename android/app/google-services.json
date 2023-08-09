@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "9348438329",
+    "project_id": "ulearning-hector",
+    "storage_bucket": "ulearning-hector.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9348438329:android:dba82de26e45e0f78170e8",
+        "android_client_info": {
+          "package_name": "com.example.ulearing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9348438329-5drkelr64a8i8khd4fckc0uplo9l9o15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvcCPs1R84E1E8GAIZ0kcm9cXe8loRZp4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9348438329-5drkelr64a8i8khd4fckc0uplo9l9o15.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "9348438329-fe3psmt5f8b9e3s1hlk5rthrc2e7i8nm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ulearing",
+                "app_store_id": "12"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

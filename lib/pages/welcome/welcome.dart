@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearing/common/values/colors.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_Events.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_states.dart';
@@ -67,7 +68,7 @@ class _WelcomeState extends State<Welcome> {
                       dotsCount: 3,
                       mainAxisAlignment: MainAxisAlignment.center,
                       decorator: DotsDecorator(
-                        color: Colors.grey,
+                        color: Colors.blueGrey.withOpacity(0.4),
                         activeColor: Colors.blue,
                         size: const Size.square(8.0),
                         activeSize: const Size(18, 8.0),
@@ -99,7 +100,7 @@ class _WelcomeState extends State<Welcome> {
           child: Text(
             title,
             style: TextStyle(
-                color: Colors.black,
+                color: AppColors.primaryText,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.normal),
           ),
@@ -110,7 +111,7 @@ class _WelcomeState extends State<Welcome> {
           child: Text(
             subTitle,
             style: TextStyle(
-                color: Colors.black.withOpacity(0.5),
+                color: AppColors.primarySecondaryElementText,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.normal),
           ),
@@ -135,7 +136,7 @@ class _WelcomeState extends State<Welcome> {
             height: 50.h,
             margin: EdgeInsets.only(top: 100.h, left: 25.w, right: 25.w),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: AppColors.primaryElement,
               borderRadius: BorderRadius.all(
                 Radius.circular(15.w),
               ),
