@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearing/pages/home/home_page.dart';
-import 'package:ulearing/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearing/pages/welcome/welcome.dart';
-import 'package:ulearing/sign_in/bloc/sign_in_blocs.dart';
+import 'package:ulearing/providers/blocs/blocs_provider.dart';
 import 'package:ulearing/sign_in/sign_in.dart';
-
-import 'app_blocs.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,17 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          // lazy: false,
-          create: (context) => WelcomeBloc(),
-        ),
-        BlocProvider(
-          // lazy: false,
-          create: (context) => AppBlocs(),
-        ),
-        BlocProvider(create: (context) => SignInBloc())
-      ],
+      providers: AppBlocProviders.allBlockProviders,
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
