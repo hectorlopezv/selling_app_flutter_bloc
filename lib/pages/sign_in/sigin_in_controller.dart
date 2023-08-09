@@ -14,9 +14,7 @@ class SignInController {
     try {
       if (type == "email") {
         //Blockprovider.of<SignInBloc>(context).state);
-        final state = context
-            .read<SignInBloc>()
-            .state;
+        final state = context.read<SignInBloc>().state;
         String emailAddress = state.email;
         String password = state.password;
         if (emailAddress.isEmpty) {
@@ -32,7 +30,7 @@ class SignInController {
 
         try {
           final credential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailAddress,
             password: password,
           );
@@ -50,6 +48,8 @@ class SignInController {
           if (user != null) {
             //success login firebase
             toastInfo(message: "success login");
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
             //error on login from firebase
             toastInfo(message: "error on login");
@@ -79,5 +79,4 @@ class SignInController {
       print(e);
     }
   }
-
 }
