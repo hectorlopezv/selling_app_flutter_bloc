@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearing/common/widgets/toast.dart';
-import 'package:ulearing/sign_in/bloc/sign_in_blocs.dart';
+import 'package:ulearing/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
   final BuildContext context;
@@ -14,7 +14,9 @@ class SignInController {
     try {
       if (type == "email") {
         //Blockprovider.of<SignInBloc>(context).state);
-        final state = context.read<SignInBloc>().state;
+        final state = context
+            .read<SignInBloc>()
+            .state;
         String emailAddress = state.email;
         String password = state.password;
         if (emailAddress.isEmpty) {
@@ -30,7 +32,7 @@ class SignInController {
 
         try {
           final credential =
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: emailAddress,
             password: password,
           );
@@ -39,7 +41,7 @@ class SignInController {
             toastInfo(message: "your user does not exist");
             return;
           }
-          if (!credential!.user!.emailVerified) {
+          if (!credential.user!.emailVerified) {
             //check if email is verified
             toastInfo(message: "your email is not verified");
             return;
@@ -78,5 +80,4 @@ class SignInController {
     }
   }
 
-  void handleRegister(String type) async {}
 }

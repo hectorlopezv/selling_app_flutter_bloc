@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearing/sign_in/widgets/reusable_icons.dart';
+import 'package:ulearing/pages/sign_in/widgets/reusable_icons.dart';
 
 Widget buildThirdPartyLogin(BuildContext context) {
   return Container(

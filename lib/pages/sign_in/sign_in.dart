@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearing/sign_in/bloc/sigin_in_states.dart';
-import 'package:ulearing/sign_in/bloc/sign_in_blocs.dart';
-import 'package:ulearing/sign_in/bloc/sign_in_events.dart';
-import 'package:ulearing/sign_in/sigin_in_controller.dart';
-import 'package:ulearing/sign_in/widgets/build_app_bar.dart';
-import 'package:ulearing/sign_in/widgets/build_login_reg_button.dart';
-import 'package:ulearing/sign_in/widgets/build_text_field.dart';
-import 'package:ulearing/sign_in/widgets/build_third_part_login.dart';
-import 'package:ulearing/sign_in/widgets/forgot_password.dart';
-import 'package:ulearing/sign_in/widgets/reusable_text.dart';
+import 'package:ulearing/pages/sign_in/bloc/sigin_in_states.dart';
+import 'package:ulearing/pages/sign_in/bloc/sign_in_blocs.dart';
+import 'package:ulearing/pages/sign_in/bloc/sign_in_events.dart';
+import 'package:ulearing/pages/sign_in/sigin_in_controller.dart';
+import 'package:ulearing/pages/sign_in/widgets/build_app_bar.dart';
+import 'package:ulearing/pages/sign_in/widgets/build_login_reg_button.dart';
+import 'package:ulearing/pages/sign_in/widgets/build_text_field.dart';
+import 'package:ulearing/pages/sign_in/widgets/build_third_part_login.dart';
+import 'package:ulearing/pages/sign_in/widgets/forgot_password.dart';
+import 'package:ulearing/pages/sign_in/widgets/reusable_text.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -28,7 +28,7 @@ class _SignInState extends State<SignIn> {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
-            appBar: buildAppBar(),
+            appBar: buildAppBar(title: "Log In"),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +80,7 @@ class _SignInState extends State<SignIn> {
                     SignInController(context: context).handleSignIn("email");
                   }),
                   buildLogInAndRegButton("Register", "register", () {
-                    print("register button");
+                    Navigator.of(context).pushNamed("/register");
                   })
                 ],
               ),

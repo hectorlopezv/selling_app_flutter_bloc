@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulearing/sign_in/bloc/sigin_in_states.dart';
-import 'package:ulearing/sign_in/bloc/sign_in_events.dart';
+import 'package:ulearing/pages/sign_in/bloc/sigin_in_states.dart';
+import 'package:ulearing/pages/sign_in/bloc/sign_in_events.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc() : super(SignInState()) {
