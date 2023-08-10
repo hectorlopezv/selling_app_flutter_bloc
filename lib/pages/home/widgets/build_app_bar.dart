@@ -15,6 +15,7 @@ AppBar buildAppBarHome() {
             child: Image.asset("assets/icons/menu.png"),
           ),
           GestureDetector(
+            onTap: () {},
             child: Container(
               width: 40.w,
               height: 40.h,
