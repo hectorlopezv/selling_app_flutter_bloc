@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearing/common/values/colors.dart';
+import 'package:ulearing/common/values/constants.dart';
+import 'package:ulearing/global.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_Events.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearing/pages/welcome/bloc/welcome_states.dart';
@@ -119,6 +121,8 @@ class _WelcomeState extends State<Welcome> {
         GestureDetector(
           onTap: () {
             if (index == 3) {
+              GlobalPreferences.storageService
+                  .setBool(AppsConsts.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
                   .pushNamedAndRemoveUntil("/sign_in", (route) => false);
             } else {
@@ -128,6 +132,7 @@ class _WelcomeState extends State<Welcome> {
                 duration: const Duration(milliseconds: 500),
                 curve: Curves.decelerate,
               );
+
               BlocProvider.of<WelcomeBloc>(context).add(WelcomeEvent());
             }
           },

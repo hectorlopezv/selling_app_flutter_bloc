@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearing/common/routes/names.dart';
+import 'package:ulearing/global.dart';
 import 'package:ulearing/pages/application/application_page.dart';
 import 'package:ulearing/pages/application/bloc/app_bloc.dart';
+import 'package:ulearing/pages/home/bloc/home_pages_blocs.dart';
+import 'package:ulearing/pages/home/home_page.dart';
 import 'package:ulearing/pages/register/bloc/register_bloc.dart';
 import 'package:ulearing/pages/register/register.dart';
 import 'package:ulearing/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -40,6 +43,13 @@ class AppPages {
         create: (_) => AppBlocs(),
       ),
     ),
+    PageEntity(
+      route: AppRoutes.HOME_PAGE,
+      page: const HomePage(),
+      bloc: BlocProvider(
+        create: (_) => HomePageBloc(),
+      ),
+    ),
   ];
 
   //return all bloc providers
@@ -55,10 +65,34 @@ class AppPages {
 
   static MaterialPageRoute GenerateRouteSettings(RouteSettings settings) {
     //check for route name matching when naviggator gets triggered
-    final page =
-        AppPages.routes.firstWhere((element) => element.route == settings.name);
+    if (settings.name != null) {
+      final page =
+          AppPages.routes.where((element) => element.route == settings.name);
+      if (page.isNotEmpty) {
+        bool deviceFirstOpen =
+            GlobalPreferences.storageService.getDeviceFirstOpen();
+        if (page.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+          bool isLogInc = GlobalPreferences.storageService.getIsLoggedIn();
+          if (isLogInc) {
+            return MaterialPageRoute(
+              builder: (_) => const ApplicationPage(),
+              settings: settings,
+            );
+          }
+          return MaterialPageRoute(
+            builder: (_) => const SignIn(),
+            settings: settings,
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => page.first.page,
+          settings: settings,
+        );
+      }
+    }
+
     return MaterialPageRoute(
-      builder: (_) => page.page,
+      builder: (_) => const SignIn(),
       settings: settings,
     );
   }

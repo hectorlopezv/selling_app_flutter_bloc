@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearing/common/values/constants.dart';
 import 'package:ulearing/common/widgets/toast.dart';
+import 'package:ulearing/global.dart';
 import 'package:ulearing/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
@@ -48,6 +50,8 @@ class SignInController {
           if (user != null) {
             //success login firebase
             toastInfo(message: "success login");
+            GlobalPreferences.storageService
+                .setString(AppsConsts.STORAGE_USER_TOKEN_KEY, "123");
             Navigator.of(context)
                 .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {

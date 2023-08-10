@@ -1,0 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:ulearing/common/service/storage_service.dart';
+
+class GlobalPreferences {
+  static late StorageService storageService;
+
+  static Future init() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    storageService = await StorageService().init();
+  }
+
+
+}
