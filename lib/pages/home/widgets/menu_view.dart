@@ -28,7 +28,10 @@ Widget menuView() {
         margin: EdgeInsets.only(top: 15.h),
         child: Row(
           children: [
-            _reusableMenuText(text: "All"),
+            _reusableMenuText(
+              text: "All",
+              backgroundColor: AppColors.primaryElement,
+            ),
             _reusableMenuText(
               text: "Popular",
               textColor: AppColors.primaryThreeElementText,
@@ -51,7 +54,7 @@ Widget _reusableMenuText(
   return Container(
     margin: EdgeInsets.only(right: 20.w),
     decoration: BoxDecoration(
-      color: AppColors.primaryElement,
+      color: backgroundColor,
       borderRadius: BorderRadius.circular(7.w),
       border: Border.all(
         color: backgroundColor,

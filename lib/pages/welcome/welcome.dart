@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearing/common/routes/names.dart';
 import 'package:ulearing/common/values/colors.dart';
 import 'package:ulearing/common/values/constants.dart';
 import 'package:ulearing/global.dart';
@@ -124,7 +125,7 @@ class _WelcomeState extends State<Welcome> {
               GlobalPreferences.storageService
                   .setBool(AppsConsts.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/sign_in", (route) => false);
+                  .pushNamedAndRemoveUntil(AppRoutes.SIGN_IN, (route) => false);
             } else {
               //animation
               _pageController.animateToPage(

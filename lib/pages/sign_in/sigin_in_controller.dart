@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ulearing/common/values/constants.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:ulearing/common/apis/user_api.dart';
+import 'package:ulearing/common/entities/entities.dart';
 import 'package:ulearing/common/widgets/toast.dart';
-import 'package:ulearing/global.dart';
 import 'package:ulearing/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
@@ -49,11 +50,23 @@ class SignInController {
           var user = credential.user;
           if (user != null) {
             //success login firebase
+            String? displayName = user.displayName;
+            String? email = user.email;
+            String? id = user.uid;
+            String? photoUrl = user.photoURL;
+            print("success login");
+            LoginRequestEntity loginRequestEntity = LoginRequestEntity();
+            loginRequestEntity.avatar = photoUrl;
+            loginRequestEntity.email = email;
+            loginRequestEntity.open_id = id;
+            loginRequestEntity.name = displayName;
+            loginRequestEntity.type = 1;
+            asyncPostAllData(loginRequestEntity);
             toastInfo(message: "success login");
-            GlobalPreferences.storageService
-                .setString(AppsConsts.STORAGE_USER_TOKEN_KEY, "123");
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil("/application", (route) => false);
+            // GlobalPreferences.storageService
+            //     .setString(AppsConsts.STORAGE_USER_TOKEN_KEY, "123");
+            // Navigator.of(context)
+            //     .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
             //error on login from firebase
             toastInfo(message: "error on login");
@@ -82,5 +95,14 @@ class SignInController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+    EasyLoading.show(
+      indicator: CircularProgressIndicator(),
+      maskType: EasyLoadingMaskType.clear,
+      dismissOnTap: true,
+    );
+    var result = await UserApi.login(param: loginRequestEntity);
   }
 }
